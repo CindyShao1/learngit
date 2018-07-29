@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.example.chapter1.DAO.CityMapper">
+    <resultMap id="baseResultMap" type="com.example.chapter1.domain.City">
+        <id column="id" property="id" jdbcType="INT"  />
+        <result column="province_id" property="province_id" jdbcType="INT"/>
+        <result column="city_name" property="city_name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        id,province_id,CITY_NAME,description
+    </sql>
+    <select id="queryCityById" resultMap="baseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="baseColumnList"/>
+        from city
+        where id=#{id}
+    </select>
+    <insert id="add" parameterType="com.example.chapter1.domain.City">
+        INSERT INTO CITY(id,PROVINCE_ID,CITY_NAME,DESCRIPTION) VALUES(#{id},#{province_id},#{city_name},#{description})
+    </insert>
+</mapper>
